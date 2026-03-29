@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://leadforge-api.onrender.com/api/$1"
+      "destination": "https://leadforge-backend-6uf6.onrender.com/api/$1"
     },
     {
       "source": "/(.*)",

@@ -156,7 +156,8 @@ const App = () => {
 
   const handleExportCSV = () => {
     if (!user) return;
-    let url = `http://localhost:8880${API_BASE}/export/csv?owner_id=${user}`;
+    // Removing the hardcoded localhost to ensure exports work in production too
+    let url = `${API_BASE}/export/csv?owner_id=${user}`;
     if (searchId) url += `&search_id=${searchId}`;
     window.open(url, '_blank');
   };
