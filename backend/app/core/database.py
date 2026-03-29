@@ -6,17 +6,20 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./leadforge.db"
+# Prioritize environment variable, fallback to local SQLite for development
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./leadforge.db")
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/leadforge")
+# Fix for Render: Postgres URLs from Render start with postgres:// but SQLAlchemy needs postgresql://
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-# For local development without Postgres, a fallback to SQLite is helpful
-if not DATABASE_URL.startswith("postgresql"):
-    DATABASE_URL = "sqlite:///./leadforge.db"
+# SQLite handles threads differently than Postgres
+connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+    DATABASE_URL, connect_args=connect_args
 )
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
