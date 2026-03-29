@@ -49,6 +49,7 @@ class SearchRequestCreate(BaseModel):
     location: str
     lead_count: Optional[int] = 50
     owner_id: Optional[str] = None
+    platform: Optional[str] = "all"
 
 class SearchRequestResponse(SearchRequestCreate):
     id: int

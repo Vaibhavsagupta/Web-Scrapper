@@ -25,6 +25,7 @@ const App = () => {
   const [allLeads, setAllLeads] = useState([]);
   const [selectedLead, setSelectedLead] = useState(null);
   const [analyzingLeads, setAnalyzingLeads] = useState({});
+  const [platform, setPlatform] = useState('all');
 
   // Fetch leads for vault
   const fetchLeads = async () => {
@@ -73,7 +74,8 @@ const App = () => {
         keyword,
         location,
         lead_count: 10,
-        owner_id: user
+        owner_id: user,
+        platform: platform
       });
       setSearchId(res.data.id);
       setActiveTab('leads');
@@ -227,6 +229,27 @@ const App = () => {
                         </div>
                     </div>
                   </div>
+
+                  <div className="space-y-3">
+                    <label className="text-xs font-bold uppercase tracking-widest text-gray-500">Target Platforms</label>
+                    <div className="grid grid-cols-3 gap-4">
+                        {[
+                          { id: 'all', label: 'General Web', icon: Globe },
+                          { id: 'reddit', label: 'Reddit', icon: MessageSquare },
+                          { id: 'linkedin', label: 'LinkedIn', icon: CheckCircle2 }
+                        ].map(p => (
+                            <button 
+                                key={p.id}
+                                onClick={() => setPlatform(p.id)}
+                                className={`flex flex-col items-center justify-center p-4 rounded-2xl border transition-all ${platform === p.id ? 'bg-blue-600/20 border-blue-500 text-blue-400 shadow-lg shadow-blue-500/10' : 'bg-black/40 border-white/10 text-gray-500 hover:border-white/20'}`}
+                            >
+                                <p.icon className="w-6 h-6 mb-2" />
+                                <span className="text-[10px] font-bold uppercase tracking-wider">{p.label}</span>
+                            </button>
+                        ))}
+                    </div>
+                  </div>
+
                   <button onClick={startSearch} className="w-full py-5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl text-lg font-bold hover:shadow-xl hover:shadow-blue-600/20 active:scale-95 transition-all">
                     Initialize Discovery
                   </button>

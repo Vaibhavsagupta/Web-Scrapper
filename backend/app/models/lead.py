@@ -87,6 +87,7 @@ class SearchRequest(Base):
     status = Column(String(50), default="pending")
     
     # Debug & Transparency Fields (Added for Forced Debugging Part C & O)
+    platform = Column(String(50), default="all")
     candidate_urls = Column(JSON, default=list)
     accepted_leads = Column(Integer, default=0)
     rejected_leads = Column(Integer, default=0)
