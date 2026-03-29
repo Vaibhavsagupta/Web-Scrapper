@@ -20,7 +20,7 @@ async def run_lead_search_task(search_id: int, keyword: str, location: str, lead
         print(f"DEBUG WORKER: Background task started for search: {search_id} on platform: {platform}")
         
         # Step 1: Discover candidate URLs dynamically
-        candidate_urls = discovery_service.find_leads(keyword, location, count=lead_count, platform=platform)
+        candidate_urls = await discovery_service.find_leads(keyword, location, count=lead_count, platform=platform)
         
         if not candidate_urls:
             print(f"DEBUG WORKER: No candidates discovered for {keyword}/{location}. Marking search as completed.")
