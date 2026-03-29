@@ -28,12 +28,12 @@ class ScrapeService:
         else:
             # Original Website scraping logic
             print(f"DEBUG SCRAPE: Identifying URL {url} as business website. Using StaticScraper.")
-            homepage_res = self.static_scraper.parse_homepage(url)
+            homepage_res = await self.static_scraper.parse_homepage(url)
             if homepage_res["status"] == "failed":
-                return None, "Failed to fetch homepage HTML"
+                return None, f"Failed to fetch homepage HTML: {homepage_res.get('error')}"
             
             internal_links = homepage_res.get("internal_links", {})
-            extra_data = self.static_scraper.scrape_internal_pages(internal_links)
+            extra_data = await self.static_scraper.scrape_internal_pages(internal_links)
             
             combined_data = self._prepare_website_data(url, homepage_res, extra_data, internal_links)
 

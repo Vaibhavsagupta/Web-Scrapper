@@ -7,10 +7,7 @@ import DashboardHome from './pages/DashboardHome';
 import LeadTable from './components/LeadTable';
 import LeadDetailModal from './components/LeadDetailModal';
 
-let API_BASE = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || "/api";
-if (API_BASE.startsWith('http') && !API_BASE.endsWith('/api')) {
-  API_BASE = API_BASE.endsWith('/') ? `${API_BASE}api` : `${API_BASE}/api`;
-}
+import { API_BASE } from './config/api';
 
 const App = () => {
   const [user, setUser] = useState(localStorage.getItem('leadforge_user') || null);
@@ -331,7 +328,7 @@ const App = () => {
                   </div>
                   <h3 className="text-xl font-bold mb-2">JSON Export</h3>
                   <p className="text-gray-500 text-sm mb-8">Export lead data for developer use or importing into other automation tools.</p>
-                  <button onClick={() => window.open(`http://localhost:8880${API_BASE}/export/json?owner_id=${user}`, '_blank')} className="w-full py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl hover:bg-white/10 transition-all">
+                  <button onClick={() => window.open(`${API_BASE}/export/json?owner_id=${user}`, '_blank')} className="w-full py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl hover:bg-white/10 transition-all">
                     Download Raw Data (.json)
                   </button>
                 </div>
