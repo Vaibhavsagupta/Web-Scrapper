@@ -1,3 +1,22 @@
+# 🚀 LeadForge AI: Production Ready
+
+This project is now configured for one-click deployment! Follow the steps below:
+
+### 1. Backend (Render)
+- Connect this GitHub repository as a "Web Service".
+- Render will detect `render.yaml` and the `render-build.sh` script automatically.
+- **Environment Variables**:
+  - `GEMINI_API_KEY`: *(REQUIRED - Paste your key here)*
+  - `FRONTEND_URL`: `*` (Add your Vercel URL later for security)
+
+### 2. Frontend (Vercel)
+- Connect this GitHub repository.
+- Set the **Root Directory** to `frontend`.
+- **Environment Variables**:
+  - `VITE_API_BASE_URL`: *(Your Backend URL from Render ending in .onrender.com)*
+
+---
+
 # LeadForge AI Scraper Platform
 
 An automated lead generation and scraping engine built with FastAPI and React.
