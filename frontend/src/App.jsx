@@ -205,7 +205,7 @@ const App = () => {
 
         <AnimatePresence mode="wait">
           {activeTab === 'dashboard' && (
-            <DashboardHome key="dash" onNavigate={setActiveTab} />
+            <DashboardHome key="dash" onNavigate={setActiveTab} apiBase={API_BASE} />
           )}
 
           {activeTab === 'search' && (
@@ -254,8 +254,12 @@ const App = () => {
                     </div>
                   </div>
 
-                  <button onClick={startSearch} className="w-full py-5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl text-lg font-bold hover:shadow-xl hover:shadow-blue-600/20 active:scale-95 transition-all">
-                    Initialize Discovery
+                  <button 
+                    onClick={startSearch} 
+                    disabled={isSearching}
+                    className={`w-full py-5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl text-lg font-bold hover:shadow-xl hover:shadow-blue-600/20 active:scale-95 transition-all flex items-center justify-center gap-3 ${isSearching ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  >
+                    {isSearching ? <><Loader2 className="w-5 h-5 animate-spin" /> Starting Engine...</> : 'Initialize Discovery'}
                   </button>
                 </div>
               </div>
