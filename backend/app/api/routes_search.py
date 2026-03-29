@@ -9,6 +9,9 @@ from app.services.scrape_service import ScrapeService
 import traceback
 import os
 from app.tasks.lead_tasks import run_lead_search_task
+router = APIRouter(prefix="/api/search", tags=["Search & Lead Discovery"])
+discovery_service = LeadDiscoveryService()
+scrape_service = ScrapeService()
 
 @router.post("/", response_model=SearchRequestResponse)
 async def start_search(payload: SearchRequestCreate, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
