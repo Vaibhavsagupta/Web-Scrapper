@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: leadforge-api
+    plan: free # Change to starter if you need high performance
+    runtime: python
+    buildCommand: "./render-build.sh"
+    startCommand: "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false # User must set this in the UI
+      - key: FRONTEND_URL
+        value: "https://your-vercel-domain.vercel.app"
+      - key: DATABASE_URL
+        sync: false # Recommend using Render PostgreSQL for production
+      - key: PYTHON_VERSION
+        value: "3.10.12"
