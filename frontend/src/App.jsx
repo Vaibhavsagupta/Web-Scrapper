@@ -6,7 +6,7 @@ import Sidebar from './components/Sidebar';
 import DashboardHome from './pages/DashboardHome';
 import LeadTable from './components/LeadTable';
 import LeadDetailModal from './components/LeadDetailModal';
-import axios from 'axios';
+
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
 
 const App = () => {
