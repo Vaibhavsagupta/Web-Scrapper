@@ -37,7 +37,7 @@ services:
       - key: PYTHON_VERSION
         value: "3.10.12"
 
-# 3. Redis Instance
-redis:
-  name: leadforge-redis
-  ipAllowList: [] # Standard for Render Redis internally
+  # 3. Redis Instance
+  - type: redis
+    name: leadforge-redis
+    ipAllowList: [] # Standard for Render Redis internally
